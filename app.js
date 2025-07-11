@@ -5,6 +5,8 @@ const rl = createInterface({
   output: process.stdout,
 });
 
-
+class Game {
+  
+}
 
 process.exit(0);
