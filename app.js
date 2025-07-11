@@ -55,7 +55,7 @@ class Player {
 class HumanPlayer extends Player {
   getValid() {
     const arr = [];
-    
+
     for (let i = 1; i < 8; i++) {
       arr.push('col' + i.toString());
       arr.push('col '+ i.toString());
@@ -100,6 +100,22 @@ function displayGrid(array) {
     row += '|';
     console.log(row);
     }
+}
+
+function placeMarker(array, column) {
+  let marker = "X";
+  if (column < 0 || column > 7) {
+    console.log("Invalid column");
+    return;
+ }
+ let row = 0
+ for(row; row < 5; row++) {
+      if (array[row + 1][column] !== "-") {
+        array[row][column] = marker;
+      }
+    }
+  array[row][column] = marker;
+  return array;
 }
 
 const array = generateGrid() ;
