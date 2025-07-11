@@ -20,10 +20,6 @@ async function getInput(prompt, accepted, rl) {
   }
 }
 
-function outputSum(num) {
-  return num*2;
-}
-
 class Game {
 
 }
@@ -76,12 +72,14 @@ function generateGrid() {
 /*
 module.exports = {
   getInput,
-  outputSum
+  Player,
+  HumanPlayer,
+  ComputerPlayer
 };
 */
 
 const temp = new HumanPlayer();
 await temp.getValue();
-console.log(temp.value, typeof temp.value);
+console.log(temp.getValid());
 
 process.exit(0);
