@@ -25,7 +25,19 @@ function outputSum(num) {
 }
 
 class Game {
-  
+
+}
+
+function generateGrid() {
+  let array = [];
+  for(let i=0; i < 6; i++){
+    let row =[];
+    for(let j=0; j< 7; j++) {
+      row.push('-');
+    }
+    array.push(row)
+  }
+  return array;
 }
 
 module.exports = {
