@@ -21,26 +21,123 @@ async function getInput(prompt, accepted, rl) {
 }
 
 class Game {
+/*
+  constructor({ getInput, HumanPlayer, ComputerPlayer }) {
+    this.getInput = getInput;
+    this.HumanPlayer = HumanPlayer;
+    this.ComputerPlayer = ComputerPlayer;
+
+    this.player1 = new this.HumanPlayer();
+    this.player2 = null;
+    this.gameRun = true;
+  }
+*/
   constructor() {
     this.player1 = new HumanPlayer();
     this.player2;
 
+    this.grid = [];
     this.gameRun = true;
   };
 
-  gameLoop() {return;};
+  checkWinner(markerPos, marker) {
+    const directions = [
+      [0, 1],   // Horizontal →
+      [1, 0],   // Vertical ↓
+      [1, 1],   // Diagonal ↘
+      [-1, 1],  // Diagonal ↗
+    ];
+
+    for (let row = 0; row < this.grid.length; row++) {
+      for (let col = 0; col < this.grid[0].length; col++) {
+        if (this.grid[row][col] !== marker) continue;
+
+        for (let [dr, dc] of directions) {
+          let count = 1;
+
+          let x = row + dr;
+          let y = col + dc;
+
+          while (
+            x >= 0 && x < this.grid.length &&
+            y >= 0 && y < this.grid[0].length &&
+            board[x][y] === player
+          ) {
+            count++;
+            if (count === 4) return true;
+              x += dr;
+              y += dc;
+          }
+        };
+      };
+    };
+  };
+
+  async gameLoop() {
+    this.grid = generateGrid();
+    this.winner = false;
+    
+    let col;
+    
+    while (true) {
+      await this.player1.getValue();
+      await this.player2.getValue();
+
+      col = this.player1.value;
+      // place marker
+
+      console.log('');
+      console.log(`Player 1 placed a marker on column ${col}`);
+      displayGrid(this.grid);
+
+      if (this.winner) {
+        console.log('Player 1 has four in a row!');
+        console.log('Player 1 wins!');
+        this.player1.numOfWins++;
+        break;
+      };
+
+      col = this.player2.value;
+      // place marker
+
+      console.log('');
+      console.log(`Player 2 placed a marker on column ${col}`);
+      displayGrid(this.grid);
+
+      if (this.winner) {
+        console.log('Player 1 has four in a row!');
+        console.log('Player 1 wins!');
+        this.player1.numOfWins++;
+        break;
+      };
+
+      break;
+    };
+
+    console.log('');
+  };
 
   async mainLoop() {
     while (this.gameRun === true){
-      await this.gameLoop();
-
-      console.log(`Current wins: ${this.player1.numOfWins}`);
+      if (this.player1.numOfWins != 0) {
+        console.log(`Current wins: ${this.player1.numOfWins}`);
+      };
+      
       let answer = await getInput('Do you want to play again? ', ['yes','no','','y','n'], rl);
-      if (answer === 'no') {
+      if (answer === 'no' | answer === 'n') {
         this.gameRun = false;
         return;
       };
-    }
+
+      let enemy = await getInput('Do you want to play against a player or a computer?', ['', 'player', 'p', 'c', 'com', 'computer', 'cpu'], rl);
+      if (['player', 'p'].includes(enemy)) {
+        this.player2 = new HumanPlayer();
+      } else {
+        this.player2 = new ComputerPlayer();
+      };
+
+      await this.gameLoop();
+    };
     return;
   };
 }
@@ -76,6 +173,10 @@ class ComputerPlayer extends Player {
     randomise() {
         this.value = Math.ceil(Math.random() * 7);
     };
+
+    async getValue() {
+      this.randomise();
+    };
 }
 
 function generateGrid() {
@@ -102,9 +203,6 @@ function displayGrid(array) {
     }
 }
 
-const array = generateGrid() ;
-displayGrid(array);
-
 /*
 module.exports = {
   getInput,
@@ -113,10 +211,6 @@ module.exports = {
   ComputerPlayer
 };
 */
-
-const temp = new HumanPlayer();
-await temp.getValue();
-console.log(temp.getValid());
 
 const game = new Game();
 await game.mainLoop();
