@@ -83,6 +83,16 @@ function displayGrid(array)
         add '|' to row
         output row
 
+function placeMarker(array, column)
+    while true
+        currentMarkerPos = top of column
+        if below currentMarkerPos is '-' or the floor
+            currentMarkerPos = one below
+        else
+            currentMarkerPos confirmed
+    array[currentMarkerPos][column]
+    return array
+
 --------------------------------
 
 async function getInput
@@ -110,6 +120,20 @@ class Game
         resetGame
 
     function gameLoop
+        generateGrid
+
+        while true
+            for player in players
+                displayGrid
+                getValue from player
+
+                placeMarker(getValue)
+                output playerMove
+
+                checkIfWinner
+                    output winner
+                    break
+
 
 class Player
     constructor
