@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "live-server",
     "test-inputs": "jest --verbose __tests__/readline.test.js",
-    "test-main": "jest --verbose __tests__/functions.test.js",
+    "test-main": "jest --verbose __tests__/main.test.js",
+    "test-periphery": "jest --verbose __tests__/functions.test.js",
     "test": "jest --watch-all",
     "coverage": "jest --coverage"
   },
