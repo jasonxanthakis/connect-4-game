@@ -6,5 +6,8 @@ const rl = createInterface({
 });
 
 
+module.exports = {
+
+};
 
 process.exit(0);
