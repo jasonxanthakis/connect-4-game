@@ -10,3 +10,5 @@ This application allows to you to play connect 4 on the command line. The user c
 3. Run `npm install`
 
 ## How to Run the Game
+1. If you haven't already, change directory to the connect-4-game folder with `cd connect-4-game`
+2. Run `npm app.js`
