@@ -35,7 +35,7 @@ class Game {
       await this.gameLoop();
 
       console.log(`Current wins: ${this.player1.numOfWins}`);
-      let answer = await Game.getInput('Do you want to play again? ', ['yes','no','','y','n'], rl);
+      let answer = await getInput('Do you want to play again? ', ['yes','no','','y','n'], rl);
       if (answer === 'no') {
         this.gameRun = false;
         return;
@@ -117,5 +117,8 @@ module.exports = {
 const temp = new HumanPlayer();
 await temp.getValue();
 console.log(temp.getValid());
+
+const game = new Game();
+await game.mainLoop();
 
 process.exit(0);
