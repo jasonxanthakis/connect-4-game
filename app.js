@@ -5,6 +5,9 @@ const rl = createInterface({
   output: process.stdout,
 });
 
+class Game {
+  
+}
 
 module.exports = {
 
