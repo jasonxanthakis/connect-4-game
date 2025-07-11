@@ -40,7 +40,7 @@ class Game {
     this.gameRun = true;
   };
 
-  checkWinner(markerPos, marker) {
+  checkWinner(marker) {
     const directions = [
       [0, 1],   // Horizontal →
       [1, 0],   // Vertical ↓
@@ -52,26 +52,42 @@ class Game {
       for (let col = 0; col < this.grid[0].length; col++) {
         if (this.grid[row][col] !== marker) continue;
 
-        for (let [dr, dc] of directions) {
+        for (let [dx, dy] of directions) {
           let count = 1;
 
-          let x = row + dr;
-          let y = col + dc;
+          let x = row + dx;
+          let y = col + dy;
 
           while (
             x >= 0 && x < this.grid.length &&
             y >= 0 && y < this.grid[0].length &&
-            board[x][y] === player
+            this.grid[x][y] === marker
           ) {
             count++;
             if (count === 4) return true;
-              x += dr;
-              y += dc;
+              x += dx;
+              y += dy;
           }
         };
       };
     };
+    return false;
   };
+
+  placeMarker(column, marker) {
+    if (column < 0 || column > 7) {
+      console.log("Invalid column");
+      return;
+    }
+    let row = 0
+    for(row; row < 5; row++) {
+      if (this.grid[row + 1][column] != "-") {
+        this.grid[row][column] = marker;
+        return;
+      }
+    }
+    this.grid[row][column] = marker;
+  }
 
   async gameLoop() {
     this.grid = generateGrid();
@@ -84,7 +100,8 @@ class Game {
       await this.player2.getValue();
 
       col = this.player1.value;
-      // place marker
+      this.placeMarker(col-1, 'X');
+      this.winner = this.checkWinner('X');
 
       console.log('');
       console.log(`Player 1 placed a marker on column ${col}`);
@@ -98,20 +115,20 @@ class Game {
       };
 
       col = this.player2.value;
-      // place marker
+      this.placeMarker(col-1, 'O');
+      this.winner = this.checkWinner('O');
 
       console.log('');
       console.log(`Player 2 placed a marker on column ${col}`);
       displayGrid(this.grid);
 
       if (this.winner) {
-        console.log('Player 1 has four in a row!');
-        console.log('Player 1 wins!');
+        console.log('Player 2 has four in a row!');
+        console.log('Player 2 wins!');
         this.player1.numOfWins++;
         break;
       };
 
-      break;
     };
 
     console.log('');
@@ -218,9 +235,6 @@ function placeMarker(array, column) {
   array[row][column] = marker;
   return array;
 }
-
-const array = generateGrid() ;
-displayGrid(array);
 
 /*
 module.exports = {
