@@ -39,13 +39,13 @@ class Player {
 class HumanPlayer extends Player {
   getValid() {
     const arr = [];
-    
+
     for (let i = 0; i < 7; i++) {
       arr.push('col' + i.toString());
       arr.push('col '+ i.toString());
       arr.push(i.toString());
     };
-    
+
     return arr;
   };
 
@@ -74,6 +74,21 @@ function generateGrid() {
   return array;
 }
 
+function displayGrid(array) {
+    for(let i=0; i < 6; i++) {
+      let row = '';
+      for (let j=0; j < 7; j++) {
+         row += '|';
+         row += array[i][j];
+      }
+    row += '|';
+    console.log(row);
+    }
+}
+
+const array = generateGrid() ;
+displayGrid(array);
+
 /*
 module.exports = {
   getInput,
@@ -81,8 +96,8 @@ module.exports = {
 };
 */
 
-const temp = new HumanPlayer();
-await temp.getValue();
-console.log(temp.value, typeof temp.value);
+//process.exit(0);
+
+process.exit(0);
 
 process.exit(0);
