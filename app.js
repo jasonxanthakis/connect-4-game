@@ -21,6 +21,30 @@ async function getInput(prompt, accepted, rl) {
 }
 
 class Game {
+  static generateGrid() {
+    let array = [];
+    for(let i=0; i < 6; i++){
+      let row =[];
+      for(let j=0; j< 7; j++) {
+        row.push('-');
+      }
+      array.push(row)
+    }
+    return array;
+  }
+
+  static displayGrid(array) {
+    for(let i=0; i < 6; i++) {
+      let row = '';
+      for (let j=0; j < 7; j++) {
+         row += '|';
+         row += array[i][j];
+      }
+    row += '|';
+    console.log(row);
+    }
+  }
+
 /*
   constructor({ getInput, HumanPlayer, ComputerPlayer }) {
     this.getInput = getInput;
@@ -90,7 +114,7 @@ class Game {
   }
 
   async gameLoop() {
-    this.grid = generateGrid();
+    this.grid = Game.generateGrid();
     this.winner = false;
     
     let col;
@@ -105,7 +129,7 @@ class Game {
 
       console.log('');
       console.log(`Player 1 placed a marker on column ${col}`);
-      displayGrid(this.grid);
+      Game.displayGrid(this.grid);
 
       if (this.winner) {
         console.log('Player 1 has four in a row!');
@@ -120,7 +144,7 @@ class Game {
 
       console.log('');
       console.log(`Player 2 placed a marker on column ${col}`);
-      displayGrid(this.grid);
+      Game.displayGrid(this.grid);
 
       if (this.winner) {
         console.log('Player 2 has four in a row!');
@@ -194,46 +218,6 @@ class ComputerPlayer extends Player {
     async getValue() {
       this.randomise();
     };
-}
-
-function generateGrid() {
-  let array = [];
-  for(let i=0; i < 6; i++){
-    let row =[];
-    for(let j=0; j< 7; j++) {
-      row.push('-');
-    }
-    array.push(row)
-  }
-  return array;
-}
-
-function displayGrid(array) {
-    for(let i=0; i < 6; i++) {
-      let row = '';
-      for (let j=0; j < 7; j++) {
-         row += '|';
-         row += array[i][j];
-      }
-    row += '|';
-    console.log(row);
-    }
-}
-
-function placeMarker(array, column) {
-  let marker = "X";
-  if (column < 0 || column > 7) {
-    console.log("Invalid column");
-    return;
- }
- let row = 0
- for(row; row < 5; row++) {
-      if (array[row + 1][column] !== "-") {
-        array[row][column] = marker;
-      }
-    }
-  array[row][column] = marker;
-  return array;
 }
 
 /*
