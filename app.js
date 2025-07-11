@@ -21,7 +21,28 @@ async function getInput(prompt, accepted, rl) {
 }
 
 class Game {
+  constructor() {
+    this.player1 = new HumanPlayer();
+    this.player2;
 
+    this.gameRun = true;
+  };
+
+  gameLoop() {return;};
+
+  async mainLoop() {
+    while (this.gameRun === true){
+      await this.gameLoop();
+
+      console.log(`Current wins: ${this.player1.numOfWins}`);
+      let answer = await Game.getInput('Do you want to play again? ', ['yes','no','','y','n'], rl);
+      if (answer === 'no') {
+        this.gameRun = false;
+        return;
+      };
+    }
+    return;
+  };
 }
 
 class Player {
