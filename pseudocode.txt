@@ -1,0 +1,129 @@
+generate 6x7 grid
+display connect 4
+
+readline function
+
+receive input
+apply input --> add to grid
+check for winner
+
+end game on winner
+
+Player class
+human Player class
+cpu Player class
+
+display enemy moves
+
+Game class
+
+ask if they want to play
+ask if vs player or cpu
+
+start a game
+
+readme file
+
+testing
+
+class Game
+    initiate players
+    ask if user wants to play
+    asks cpu or player vs player
+    generateGrid
+    
+    start game round loop
+        loop through 2 players
+            ask for input from player or get placement from cpu
+            place on grid --> can't place in a taken spot
+            displayGrid
+
+            check if winner
+            check if no spaces left
+    
+    displayWinner
+
+    loop back to top
+
+class Player
+    initiate
+    store win/loss
+    reset
+
+class HumanPlayer inherits Player
+    prompt for input
+    store input
+
+class ComputerPlayer inherits Player
+    randomly generate input
+    store input
+
+
+// readline function
+async function getInput
+    input = await readline
+    //process the input
+    return input
+
+function generateGrid
+array = []
+for loop in rows = 6
+    row = []
+    for loop in cols = 7
+        row.push(' - ')
+    array.push(row)
+return array
+
+function displayGrid(array)
+    for loop in rows
+        row = ''
+        for loop in cols
+            add '|' to row
+            add array[row][col] to row
+        add '|' to row
+        output row
+
+--------------------------------
+
+async function getInput
+
+class Game
+    static generateGrid
+
+    constructor
+        grid = generateGrid
+        player1 = HumanPlayer
+        player2;
+    
+    function displayGrid
+
+    function resetGame
+        grid = generateGrid
+
+    function mainLoop
+        ask if you want to play
+        ask if player or cpu
+            either set player2 = HumanPlayer or set player2 = ComputerPlayer
+        
+        gameLoop
+
+        resetGame
+
+    function gameLoop
+
+class Player
+    constructor
+        position = col1 - col8
+
+class HumanPlayer inherits Player
+    async getPosition
+
+    validatePosition
+
+class ComputerPlayer inherits Player
+    // Extended Feature
+    //constructor
+    //    super
+    //    difficulty = 0
+
+    generateRandomPosition
