@@ -9,7 +9,8 @@
   },
   "scripts": {
     "dev": "live-server",
-    "test-once": "jest",
+    "test-inputs": "jest --verbose __tests__/readline.test.js",
+    "test-main": "jest --verbose __tests__/functions.test.js",
     "test": "jest --watch-all",
     "coverage": "jest --coverage"
   },
