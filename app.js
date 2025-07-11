@@ -61,7 +61,7 @@ class HumanPlayer extends Player {
       arr.push('col '+ i.toString());
       arr.push(i.toString());
     };
-    
+
     return arr;
   };
 
@@ -89,6 +89,21 @@ function generateGrid() {
   }
   return array;
 }
+
+function displayGrid(array) {
+    for(let i=0; i < 6; i++) {
+      let row = '';
+      for (let j=0; j < 7; j++) {
+         row += '|';
+         row += array[i][j];
+      }
+    row += '|';
+    console.log(row);
+    }
+}
+
+const array = generateGrid() ;
+displayGrid(array);
 
 /*
 module.exports = {
